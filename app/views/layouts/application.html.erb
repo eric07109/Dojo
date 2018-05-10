@@ -13,8 +13,8 @@
   		<a class="navbar-brand" href="#">道場</a>
   		<div class="navbar-nav">
   			<a class="nav-item nav-link" href="#">Feeds</a>
-  			<a class="nav-item nav-link" href="#">All Posts</a>
-  			<a class="nav-item nav-link" href="#">New Post</a>
+        <%= link_to "All Posts", posts_path, class: "nav-item nav-link"%>
+        <%= link_to "New Post", new_post_path, class: "nav-item nav-link"%>
   		</div>
   		<%if user_signed_in?%>
         <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "nav-item nav-link ml-auto" %>
