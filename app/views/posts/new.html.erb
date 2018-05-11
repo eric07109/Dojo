@@ -1,0 +1,10 @@
+<%= form_for @post do |post| %>
+	<%= post.label :title %>
+	<%= post.text_field :title %>
+
+	<%= post.label :content, "Post Content" %>
+	<%= post.text_area :content %>
+
+	<%= post.submit "Save Draft", formaction: "stash" %>
+	<%= post.submit %>
+<% end %>
