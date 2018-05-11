@@ -10,7 +10,11 @@ class PostsController < ApplicationController
 
 	def create
 		@post = current_user.posts.build(post_params)
-		@post.published = 1
+
+		if params[:commit] == "Create Post"
+			@post.published = true
+		end
+
 		if @post.save
 			redirect_back fallback_location: new_post_path 
 		else
@@ -22,7 +26,7 @@ class PostsController < ApplicationController
 
 	private
 	def post_params
-		params.require(:post).permit(:title, :content, :published)
+		params.require(:post).permit(:title, :content)
 	end
 
 end
