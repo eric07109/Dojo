@@ -2,6 +2,7 @@ class PostsController < ApplicationController
 	
 
 	def index
+		@posts = Post.where(published: true).to_a
 	end
 
 	def new
