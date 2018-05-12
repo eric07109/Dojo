@@ -8,7 +8,10 @@
 	All <%= post.radio_button :privacy, "all" %>
 	Friend <%= post.radio_button :privacy, "friend" %>
 	Myself <%= post.radio_button :privacy, "myself" %>
-
+	
+	
+	<%= post.collection_check_boxes :category_id, @categories, :id, :name%>
+	
 	<%= post.submit "Save Draft" %>
 	<%= post.submit %>
 <% end %>
