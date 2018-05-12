@@ -7,29 +7,36 @@ class PostsController < ApplicationController
 
 	def new
 		@post = Post.new()
+		@categories = Category.all
 	end
 
 	def create
 		@post = current_user.posts.build(post_params)
+		
+		@categories = params[:category][:id]
 
-		if params[:commit] == "Create Post"
-			@post.published = true
-		end
+		params[:commit] == "Create Post" ? @post.published = true : @post.published = false
 
-		if @post.published == true and @post.save
-			redirect_back fallback_location: posts_path 
-		elsif @post.published == false and @post.save
-			#todo: redirect to user profile
-			redirect_to posts_path 
+		# create post category mapping from the selected categories
+		if @post.save
+			@categories.each { |c|
+				c.to_i
+				@post.post_category_mappings.create([
+					{category_id: c}
+				])
+			}
 		else
 			logger.debug "#{@post.errors.full_messages.to_sentence}"
 		end
+
+		#todo: if stash, redirect to user profile
+		redirect_back fallback_location: posts_path
 	end
 
 
 	private
 	def post_params
-		params.require(:post).permit(:title, :content, :privacy)
+		params.require(:post).permit(:title, :content, :privacy, categories_attributes: [:category_id])
 	end
 
 end
