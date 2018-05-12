@@ -5,9 +5,9 @@
 	<%= post.label :content, "Post Content" %>
 	<%= post.text_area :content %>
 
-	All <%= post.check_box :privacy, {}, "all", nil%>
-	Friend <%= post.check_box :privacy, {}, "friend", nil%>
-	Myself <%= post.check_box :privacy, {}, "myself", nil%>
+	All <%= post.radio_button :privacy, "all" %>
+	Friend <%= post.radio_button :privacy, "friend" %>
+	Myself <%= post.radio_button :privacy, "myself" %>
 
 	<%= post.submit "Save Draft" %>
 	<%= post.submit %>
