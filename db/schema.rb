@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180512062305) do
+ActiveRecord::Schema.define(version: 20180512094405) do
 
   create_table "categories", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -33,7 +33,6 @@ ActiveRecord::Schema.define(version: 20180512062305) do
     t.integer "author_id", null: false
     t.boolean "published", default: false, null: false
     t.string "privacy"
-    t.integer "category_id"
   end
 
   create_table "users", force: :cascade do |t|
