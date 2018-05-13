@@ -3,6 +3,7 @@ class PostsController < ApplicationController
 
 	def index
 		@posts = Post.where(published: true)
+		@categories = Category.all
 	end
 
 	def new

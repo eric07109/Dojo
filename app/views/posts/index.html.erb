@@ -1,3 +1,29 @@
-<% @posts.each do |post|%>
-	Title: <%= post.title %>
-<%end%>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<% @categories.each do |cat| %>
+				<button type="button" class="btn btn-primary"><%= cat.name %></button>
+			<% end %>
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">Replies Count</th>
+						<th scope="col">Title</th>
+						<th scope="col">Last replied at</th>
+						<th scope="col">View Count</th>
+					</tr>
+					<tbody>
+						<% @posts.each do |post|%>
+							<tr>
+								<td></td>
+								<td><%= link_to post.title, post_path(post) %></td>
+								<td></td>
+								<td></td>
+							</tr>
+						<%end%>
+					</tbody>
+				</thead>
+			</table>
+		</div>
+	</div>
+</div>
