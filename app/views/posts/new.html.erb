@@ -11,6 +11,9 @@
 	
 	Category: <%= collection_check_boxes :category, :id, @categories, :id, :name%>
 	
+	<%= post.label :attachment %><br />
+    <%= post.file_field :attachment %>
+
 	<%= post.submit "Save Draft" %>
 	<%= post.submit %>
 <% end %>
