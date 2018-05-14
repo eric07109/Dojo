@@ -34,6 +34,12 @@
           <%= f.text_field :lastname %>
         </div>
 
+        <div class="field">
+          <%= f.label :profile_picture %><br />
+          <%= f.file_field :avatar %>
+          <!-- #todo: preview image before submitting -->
+        </div>
+
         <div class="actions">
           <%= f.submit "Sign up" %>
         </div>
