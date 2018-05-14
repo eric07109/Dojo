@@ -10,8 +10,9 @@
 	</div>
 	<div class="row">
 		<div class="col-md-4">
-			<%= @post.author.email%>
-			<!-- todo: 擴充user model，讓它有照片和姓名-->
+			<%= image_tag @post.author.avatar, size: "100x100"%>
+			<%= @post.author.firstname%>
+			<%= @post.author.lastname%>
 			<%= button_to "Add Friend" %>
 		</div>
 		<div class="col-md-8">
