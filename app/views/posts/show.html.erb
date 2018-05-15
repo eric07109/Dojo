@@ -1,10 +1,10 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
-			<%= @post.title %>
-			<%= button_to "Collect" %>
+			<h3 class="post_header_item"><%= @post.title %></h3>
+			<%= button_tag "Collect", class: "btn btn-primary post_header_item" %>
 			<!-- todo: 補上collect -->
-			<%= button_to "Comment" %>
+			<%= button_tag "Comment", class: "btn btn-primary post_header_item" %>
 			<!-- todo: comment -->
 		</div>
 	</div>
