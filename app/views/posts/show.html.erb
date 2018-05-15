@@ -9,15 +9,25 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-4">
+		<div class="col-md-3">
 			<%= image_tag @post.author.avatar, size: "100x100"%>
 			<%= @post.author.firstname%>
 			<%= @post.author.lastname%>
 			<%= button_to "Add Friend" %>
 		</div>
-		<div class="col-md-8">
+		<div class="col-md-9">
 			<%= @post.content%>
 			<!-- todo 若使用者是該文章/回覆的作者，在本頁面可以同步進行編輯和刪除-->
 		</div>
 	</div>
+	<% @comments.each do |c| %>
+		<%= image_tag c.user.avatar, size: "100x100"%>
+		<%= c.user.firstname%>
+		<%= c.user.lastname%>
+		<%= c.content %>
+	<%end%>
+	<%= form_tag post_comments_path(@post.id, action: 'create'), method: "post" do %>
+		<%= text_field_tag :content%>
+		<%= submit_tag "Comment" %>
+	<% end %>
 </div>
