@@ -16,3 +16,14 @@
  // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
 
+.post_title_input{
+	width: 100%;
+}
+.post_content_input{
+	width: 100%;
+	height: 250px;
+}
+.post_input_header{
+	font-weight: bold;
+	margin: 7px 0px 7px 0px;
+}

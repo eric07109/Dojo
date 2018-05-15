@@ -1,19 +1,23 @@
-<%= form_for @post do |post| %>
-	<%= post.label :title %>
-	<%= post.text_field :title %>
+<div class="container">
+	<div class="col-md-12">
+		<%= form_for @post do |post| %>
+				<%= post.label :title, class: "post_input_header" %><br>
+				<%= post.text_field :title, class: "post_title_input" %><br>
+			
+				<%= post.label :content, "Post Content", class: "post_input_header" %><br>
+				<%= post.text_area :content, class: "post_content_input" %><br>
 
-	<%= post.label :content, "Post Content" %>
-	<%= post.text_area :content %>
-
-	All <%= post.radio_button :privacy, "all" %>
-	Friend <%= post.radio_button :privacy, "friend" %>
-	Myself <%= post.radio_button :privacy, "myself" %>
-	
-	Category: <%= collection_check_boxes :category, :id, @categories, :id, :name%>
-	
-	<%= post.label :attachment %><br />
-    <%= post.file_field :attachment %>
-
-	<%= post.submit "Save Draft" %>
-	<%= post.submit %>
-<% end %>
+				<%= post.label :privacy, class: "post_input_header" %>:
+				<%= post.label :all %> <%= post.radio_button :privacy, "all" %>
+				<%= post.label :friend %> <%= post.radio_button :privacy, "friend" %>
+				<%= post.label :myself %> <%= post.radio_button :privacy, "myself" %><br>
+			
+				<%= post.label :category, class: "post_input_header" %>: <%= collection_check_boxes :category, :id, @categories, :id, :name%><br>
+			
+				<%= post.label :attachment, class: "post_input_header" %>: <%= post.file_field :attachment %><br>
+			
+			<%= post.submit "Save Draft", class: "btn btn-primary" %>
+			<%= post.submit "Create Post", class: "btn btn-primary" %>
+		<% end %>
+	</div>
+</div>
