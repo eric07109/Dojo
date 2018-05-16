@@ -2,7 +2,7 @@ class PostsController < ApplicationController
 	
 
 	def index
-		@posts = Post.where(published: true)
+		@posts = Post.where("posts.published" => true)
 		@categories = Category.all
 	end
 

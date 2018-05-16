@@ -16,5 +16,8 @@ class Post < ApplicationRecord
 	#for creating post category mapping in post new action
 	accepts_nested_attributes_for :categories
 
+	def commented?
+		return self.comments != []
+	end
 
 end
