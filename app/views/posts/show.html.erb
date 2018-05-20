@@ -8,37 +8,62 @@
 			<!-- todo: comment -->
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-md-3">
+	<div class="row post_show_entry">
+		<div class="col-md-2 post_show_user">
 			<%= image_tag @post.author.avatar, size: "75x75"%>
-			<%= @post.author.firstname%>
-			<%= @post.author.lastname%>
-			<%= button_to "Add Friend" %>
+			<p><%= @post.author.firstname%> <%= @post.author.lastname%></p>
+			<%= button_tag "Add Friend", class: "btn btn-light btn-sm" %>
 		</div>
-		<div class="col-md-9">
-			<%= @post.content%>
+		<div class="col-md-10">
+			<div class="row">
+				<div class="col-md-10 post_show_content">
+					<%= @post.content%><br>
+					<% if @post.attachment.present? %><%= image_tag @post.attachment, class: "img_responsive" %><% end %>
+				</div>
+				<div class="col-md-2">
+					<% if @post.author == current_user%>
+						<%= button_tag "X", class: "btn btn-light btn-sm"%>
+						<%= button_tag "Edit", class: "btn btn-light btn-sm"%>
+					<% end %>
+				</div>
+			</div>
 			<!-- todo 若使用者是該文章/回覆的作者，在本頁面可以同步進行編輯和刪除-->
 		</div>
 	</div>
-	<div class="row">
+	<!-- Comments if any -->
+	<div class="row post_show_content">
 		<% @comments.each do |c| %>
-			<div class="col-md-3">
+			<div class="col-md-2 post_show_user">
 				<%= image_tag c.user.avatar, size: "75x75"%>
-				<%= c.user.firstname%>
-				<%= c.user.lastname%>
-				<%= button_to "Add Friend" %>
+				<p><%= c.user.firstname%> <%= c.user.lastname%></p>
+				<%= button_tag "Add Friend", class: "btn btn-light btn-sm" %>
 			</div>
-			<div class="col-md-9">
-				<%= c.content %>
+			<div class="col-md-10">
+				<div class="row">
+					<div class="col-md-10"><%= c.content %></div>
+					<div class="col-md-2">
+					<% if c.user == current_user%>
+						<%= button_tag "X", class: "btn btn-light btn-sm"%>
+						<%= button_tag "Edit", class: "btn btn-light btn-sm"%>
+					<% end %>
+				</div>
+				</div>
 			</div>
 		<%end%>
 	</div>
+	<!-- Comment area -->
 	<div class="row">
-		<div class="col-md-12">
-			<%= form_with url: post_comments_path(@post.id, action: 'create'), method: "post" do |form| %>
-				<%= form.text_field :content, class: :comment_input%>
-				<%= form.submit "Comment" %>
-			<% end %>
+		<div class="col-md-2"></div>
+		<div class="col-md-10">
+			<div class="row">
+				<div class="col-md-10 post_show_comment">
+					<%= form_with url: post_comments_path(@post.id, action: 'create'), method: "post" do |form| %>
+						<%= form.text_field :content, class: :comment_input%>
+						<%= form.submit "Comment" %>
+					<% end %>
+				</div>
+				<div class="col-md-2"></div>
+			</div>
 		</div>
 	</div>
 </div>
