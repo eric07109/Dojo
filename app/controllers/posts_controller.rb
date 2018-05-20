@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
 	before_action :authenticate_user!, :except => [:index]
+	impressionist :actions => [:show]
 
 	def index
 		@posts = Post.where("posts.published" => true)
