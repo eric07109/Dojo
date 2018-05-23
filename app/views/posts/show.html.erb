@@ -12,7 +12,11 @@
 		<div class="col-md-2 post_show_user">
 			<%= image_tag @post.author.avatar, size: "75x75"%>
 			<p><%= @post.author.firstname%> <%= @post.author.lastname%></p>
-			<%= button_tag "Add Friend", class: "btn btn-light btn-sm" %>
+			<% if current_user.sent_or_received_friendship_invitation(@post.author) %>
+				<%= button_to "Request Sent", {}, disabled: true, class: 'btn btn-light btn-sm' %>
+			<% else %>
+				<%= button_to "Add Friend", friendships_path(receiver_id: @post.author), method: :post, class: 'btn btn-light btn-sm' %>
+			<% end %>
 		</div>
 		<div class="col-md-10">
 			<div class="row">
