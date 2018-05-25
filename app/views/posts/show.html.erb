@@ -12,15 +12,7 @@
 		<div class="col-md-2 post_show_user">
 			<%= image_tag @post.author.avatar, size: "75x75"%>
 			<p><%= @post.author.firstname%> <%= @post.author.lastname%></p>
-			<% unless @post.author == current_user or @post.author.friend_with?(current_user) %>
-				<% if current_user.friends_to_be_approved.include?(@post.author) %>
-					<%= button_to "Request Sent", {}, disabled: true, class: 'btn btn-light btn-sm' %>
-				<% elsif current_user.friends_to_approve.include?(@post.author)%>
-					<%= button_to "Accept Invitation", friendship_path(@post.author), method: :patch, class: 'btn btn-light btn-sm' %>
-				<% else %>
-					<%= button_to "Add Friend", friendships_path(receiver_id: @post.author), method: :post, class: 'btn btn-light btn-sm' %>
-				<% end %>
-			<% end %>
+			<%= render partial: "shared/friendButtons", locals: { user: @post.author} %>
 		</div>
 		<div class="col-md-10">
 			<div class="row">
@@ -44,7 +36,7 @@
 			<div class="col-md-2 post_show_user">
 				<%= image_tag c.user.avatar, size: "75x75"%>
 				<p><%= c.user.firstname%> <%= c.user.lastname%></p>
-				<%= button_tag "Add Friend", class: "btn btn-light btn-sm" %>
+				<%= render partial: "shared/friendButtons", locals: { user: c.user} %>
 			</div>
 			<div class="col-md-10">
 				<div class="row">
