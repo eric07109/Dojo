@@ -8,6 +8,6 @@ Rails.application.routes.draw do
   	resources :comments, shallow: true
   end
 
-  resources :friendships, only: [:create, :destroy]
+  resources :friendships, only: [:create, :destroy, :update]
 
 end

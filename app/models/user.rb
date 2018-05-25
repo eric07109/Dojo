@@ -11,13 +11,19 @@ class User < ApplicationRecord
 
 	has_many :commented_posts, through: :comments, source: :post
 
-	has_many :sent_friendships, :class_name => "Friendship", :foreign_key => "sender_id"
-	has_many :sent_friends, through: :sent_friendships, source: :receiver
+	has_many :unapproved_friending, -> { where(approved: false) }, :class_name => "Friendship", :foreign_key => "sender_id"
+	has_many :friends_to_be_approved, through: :unapproved_friending, source: :receiver
 
-	has_many :received_friendships,  class_name: "Friendship", foreign_key: "receiver_id"
-	has_many :received_friends, through: :received_friendships, source: :sender
+	has_many :unapproved_friended, -> { where(approved: false) }, class_name: "Friendship", foreign_key: "receiver_id"
+	has_many :friends_to_approve, through: :unapproved_friended, source: :sender
 
-	def sent_or_received_friendship_invitation(target)
-		self.sent_friends.include?(target) or self.received_friends.include?(target)
+	has_many :approved_friending, -> { where(approved: true) }, :class_name => "Friendship", :foreign_key => "sender_id"
+	has_many :accepted_friends, through: :approved_friending, source: :receiver
+
+	has_many :approved_friended, -> { where(approved: true) }, class_name: "Friendship", foreign_key: "receiver_id"
+	has_many :approved_friends, through: :approved_friended, source: :sender
+
+	def friend_with?(user)
+		self.accepted_friends.include?(user) or self.approved_friends.include?(user)
 	end
 end
