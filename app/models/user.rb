@@ -11,12 +11,14 @@ class User < ApplicationRecord
 
 	has_many :commented_posts, through: :comments, source: :post
 
+	#unapproved
 	has_many :unapproved_friending, -> { where(approved: false) }, :class_name => "Friendship", :foreign_key => "sender_id"
 	has_many :friends_to_be_approved, through: :unapproved_friending, source: :receiver
 
 	has_many :unapproved_friended, -> { where(approved: false) }, class_name: "Friendship", foreign_key: "receiver_id"
 	has_many :friends_to_approve, through: :unapproved_friended, source: :sender
 
+	#approved
 	has_many :approved_friending, -> { where(approved: true) }, :class_name => "Friendship", :foreign_key => "sender_id"
 	has_many :accepted_friends, through: :approved_friending, source: :receiver
 
