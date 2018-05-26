@@ -1,3 +1,5 @@
+<%= image_tag user.avatar, size: "50x50"%>
+<%= link_to "#{user.firstname} #{user.lastname}", user_path(id: user) %>
 <% unless user == current_user or user.friend_with?(current_user) %>
 	<% if current_user.friends_to_be_approved.include?(user) %>
 		<%= button_to "Request Sent", {}, disabled: true, class: 'btn btn-light btn-sm' %>
