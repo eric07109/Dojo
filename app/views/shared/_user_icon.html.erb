@@ -1,4 +1,4 @@
-<%= image_tag user.avatar, size: "50x50"%>
+<%= image_tag user.avatar, size: "50x50", class: "d-block mx-auto"%>
 <%= link_to "#{user.firstname} #{user.lastname}", user_path(id: user) %>
 <% unless user == current_user or user.friend_with?(current_user) %>
 	<% if current_user.friends_to_be_approved.include?(user) %>

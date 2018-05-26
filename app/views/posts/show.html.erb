@@ -26,9 +26,10 @@
 			<!-- todo 若使用者是該文章/回覆的作者，在本頁面可以同步進行編輯和刪除-->
 		</div>
 	</div>
+	<hr>
 	<!-- Comments if any -->
-	<div class="row post_show_content">
-		<% @comments.each do |c| %>
+	<% @comments.each do |c| %>
+	<div class="row post_show_comment">
 		<div class="col-md-2 post_show_user">
 			<%= render partial: "shared/user_icon", locals: { user: c.user} %>
 		</div>
@@ -43,8 +44,8 @@
 			</div>
 			</div>
 		</div>
-		<%end%>
 	</div>
+	<%end%>
 	<!-- Comment area -->
 	<div class="row">
 		<div class="col-md-2"></div>
