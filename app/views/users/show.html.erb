@@ -1,0 +1,37 @@
+<div class="container">
+	<div class="row user_profile">
+		<div class="col-md-2">
+			<%= image_tag @user.avatar, size: "100x100"%>
+		</div>
+		<div class="col-md-10">
+		</div>
+	</div>
+	<ul class="nav nav-tabs" id="myTab" role="tablist">
+	  <li class="nav-item">
+	    <a class="nav-link active" id="Post-tab" data-toggle="tab" href="#Post" role="tab" aria-controls="Post" aria-selected="true">Post</a>
+	  </li>
+	  <li class="nav-item">
+	    <a class="nav-link" id="comment-tab" data-toggle="tab" href="#comment" role="tab" aria-controls="comment" aria-selected="false">Comment</a>
+	  </li>
+	  <li class="nav-item">
+	    <a class="nav-link" id="collection-tab" data-toggle="tab" href="#collection" role="tab" aria-controls="collection" aria-selected="false">Collection</a>
+	  </li>
+	  <li class="nav-item">
+	    <a class="nav-link" id="draft-tab" data-toggle="tab" href="#draft" role="tab" aria-controls="draft" aria-selected="false">Draft</a>
+	  </li>
+	  <li class="nav-item">
+	    <a class="nav-link" id="friend-tab" data-toggle="tab" href="#friend" role="tab" aria-controls="friend" aria-selected="false">Friend</a>
+	  </li>
+	</ul>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="tab-content" id="myTabContent">
+			  <div class="tab-pane fade show active" id="Post" role="tabpanel" aria-labelledby="Post-tab">abv</div>
+			  <div class="tab-pane fade" id="comment" role="tabpanel" aria-labelledby="comment-tab">1234</div>
+			  <div class="tab-pane fade" id="collection" role="tabpanel" aria-labelledby="collection-tab">2345453</div>
+			  <div class="tab-pane fade" id="draft" role="tabpanel" aria-labelledby="draft-tab">2345453</div>
+			  <div class="tab-pane fade" id="friend" role="tabpanel" aria-labelledby="friend-tab">2345453</div>
+			</div>
+		</div>
+	</div>
+</div>
