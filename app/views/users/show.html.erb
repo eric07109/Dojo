@@ -26,7 +26,28 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="tab-content" id="myTabContent">
-			  <div class="tab-pane fade show active" id="Post" role="tabpanel" aria-labelledby="Post-tab">abv</div>
+			  <div class="tab-pane fade show active" id="Post" role="tabpanel" aria-labelledby="Post-tab">
+			  	<br>
+			  	<table class="table table-striped">
+			  		<thead>
+			  			<tr>
+			  				<th scope="col">Title</th>
+			  				<th scope="col">Published date</th>
+			  				<th scope="col">Brief</th>
+			  			</tr>
+			  		</thead>
+			  		<tbody>
+				  		<% @user_posts.each do |p| %>
+					  		<tr>
+					  			<td><%= p.title%></td>
+					  			<td><%= p.created_at %></td>
+					  			<td><%= truncate(p.content) %></td>
+					  		</tr>
+					  	<% end %>
+					</tbody>
+			  	</table>
+			  	
+			  </div>
 			  <div class="tab-pane fade" id="comment" role="tabpanel" aria-labelledby="comment-tab">1234</div>
 			  <div class="tab-pane fade" id="collection" role="tabpanel" aria-labelledby="collection-tab">2345453</div>
 			  <div class="tab-pane fade" id="draft" role="tabpanel" aria-labelledby="draft-tab">2345453</div>
