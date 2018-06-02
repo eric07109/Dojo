@@ -17,8 +17,11 @@
         <%= link_to "New Post", new_post_path, class: "nav-item nav-link"%>
   		</div>
   		<%if user_signed_in?%>
-        <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "nav-item nav-link ml-auto" %>
-      <%else%>
+        <div class="ml-auto">
+          <%= link_to "My Profile", user_path(current_user), method: :get, class: "nav-item nav-link d-inline-block" %>
+          <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "nav-item nav-link d-inline-block" %>
+        </div>
+        <%else%>
         <%= link_to "Login", new_user_session_path, class: "nav-item nav-link ml-auto" %>
       <%end%>
   	</nav>
