@@ -48,7 +48,25 @@
 			  	</table>
 			  	
 			  </div>
-			  <div class="tab-pane fade" id="comment" role="tabpanel" aria-labelledby="comment-tab">1234</div>
+			  <div class="tab-pane fade" id="comment" role="tabpanel" aria-labelledby="comment-tab">
+			  	<table class="table table-striped">
+			  		<br>
+			  		<thead>
+			  			<tr>
+			  				<th scope="col">Post Title</th>
+			  				<th scope="col">Comment</th>
+			  			</tr>
+			  		</thead>
+			  		<tbody>
+					  	<% @user_comments.each do |c| %>
+							<tr>
+					  			<td><%= link_to "#{c.post.title}", post_path(c) %></td>
+					  			<td><%= truncate(c.content) %></td>
+						  	</tr>
+					  	<% end %>
+					</tbody>
+			  	</table>
+			  </div>
 			  <div class="tab-pane fade" id="collection" role="tabpanel" aria-labelledby="collection-tab">2345453</div>
 			  <div class="tab-pane fade" id="draft" role="tabpanel" aria-labelledby="draft-tab">2345453</div>
 			  <div class="tab-pane fade" id="friend" role="tabpanel" aria-labelledby="friend-tab">2345453</div>
