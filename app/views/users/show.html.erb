@@ -39,7 +39,7 @@
 			  		<tbody>
 				  		<% @user_posts.each do |p| %>
 					  		<tr>
-					  			<td><%= p.title%></td>
+					  			<td><%= link_to "#{p.title}", post_path(p) %></td>
 					  			<td><%= p.created_at %></td>
 					  			<td><%= truncate(p.content) %></td>
 					  		</tr>
