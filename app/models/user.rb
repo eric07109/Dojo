@@ -6,8 +6,8 @@ class User < ApplicationRecord
 	mount_uploader :avatar, AvatarUploader
 
 	has_many :posts, foreign_key: "author_id"
-	has_many :published_posts, -> {where(published: true)}, :class_name => "Post", :foreign_key => "author_id"
-	has_many :unpublished_posts, -> {where(published: false)}, :class_name => "Post", :foreign_key => "author_id"
+	has_many :published_posts, -> { where published: true }, :class_name => "Post", :foreign_key => "author_id"
+	has_many :unpublished_posts, -> { where published: false }, :class_name => "Post", :foreign_key => "author_id"
 
 	has_many :comments
 

@@ -19,4 +19,8 @@ class Post < ApplicationRecord
 		return self.comments != []
 	end
 
+	def published?
+		return self.published
+	end
+
 end
