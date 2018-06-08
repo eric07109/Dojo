@@ -15,6 +15,9 @@ class Post < ApplicationRecord
 	#for creating post category mapping in post new action
 	accepts_nested_attributes_for :categories
 
+	has_many :collections
+	has_many :collected_user, through: :collections, source: :user
+
 	def commented?
 		return self.comments != []
 	end

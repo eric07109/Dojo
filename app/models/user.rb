@@ -27,6 +27,9 @@ class User < ApplicationRecord
 	has_many :approved_friended, -> { where(approved: true) }, class_name: "Friendship", foreign_key: "receiver_id"
 	has_many :approved_friends, through: :approved_friended, source: :sender
 
+	has_many :collections
+	has_many :collected_posts, through: :collections, source: :post
+
 	def friend_with?(user)
 		self.accepted_friends.include?(user) or self.approved_friends.include?(user)
 	end
