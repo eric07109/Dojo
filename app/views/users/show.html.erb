@@ -69,6 +69,7 @@
 			  </div>
 			  <div class="tab-pane fade" id="collection" role="tabpanel" aria-labelledby="collection-tab">2345453</div>
 			  <div class="tab-pane fade" id="draft" role="tabpanel" aria-labelledby="draft-tab">
+			  	<br>
 			  	<table class="table table-striped">
 			  		<thead>
 			  			<tr>
@@ -79,7 +80,7 @@
 			  		<tbody>
 				  		<% @user_unpublished_posts.each do |p| %>
 					  		<tr>
-					  			<td><%= link_to "#{p.title}", post_path(p) %></td>
+					  			<td><%= link_to "#{p.title}", edit_post_path(p) %></td>
 					  			<td><%= p.created_at %></td>
 					  		</tr>
 					  	<% end %>
