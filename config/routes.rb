@@ -8,6 +8,10 @@ Rails.application.routes.draw do
 
   resources :posts do
   	resources :comments, shallow: true
+  	member do 
+  		post :add_collection
+  		delete :remove_collection
+  	end
   end
 
   resources :friendships, only: [:create, :destroy, :update]
