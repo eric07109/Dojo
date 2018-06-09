@@ -78,11 +78,10 @@
 			  		</thead>
 			  		<tbody>
 			  			<% @user_collected_posts.each do |p| %>
-			  				<tr>
+			  				<tr id="collection-<%= p.id %>">
 				  				<td><%= link_to "#{p.title}", post_path(p) %></td>
-				  				<td><%= link_to "Uncollect", remove_collection_post_path(post_id: p.id), method: :delete, class: "btn btn-danger btn-sm" %></td>
-<!-- 				  				TODO: make the Uncollect button AJAX
- -->				  			</tr>
+				  				<td><%= link_to "Uncollect", remove_collection_post_path(post_id: p.id), method: :delete, remote: true, class: "btn btn-danger btn-sm" %></td>
+				  			</tr>
 			  			<% end %>
 			  		</tbody>
 			  	</table>

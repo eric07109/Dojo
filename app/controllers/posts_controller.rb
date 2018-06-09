@@ -47,9 +47,9 @@ class PostsController < ApplicationController
 	end
 
 	def remove_collection
-		@collection = current_user.collections.where({post_id: params[:post_id]})
-		@collection.destroy_all
-		redirect_back fallback_location: posts_path(:post_id)
+		@collection = current_user.collections.where({post_id: params[:post_id]}).first
+		@collection.destroy
+		# redirect_back fallback_location: posts_path(:post_id)
 	end
 
 	private
