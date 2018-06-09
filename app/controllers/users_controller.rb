@@ -7,5 +7,6 @@ class UsersController < ApplicationController
 		@user_published_posts = @user.published_posts
 		@user_comments = @user.comments
 		@user_unpublished_posts = @user.unpublished_posts
+		@user_collected_posts = @user.collected_posts
 	end
 end
