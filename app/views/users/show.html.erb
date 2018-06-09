@@ -105,7 +105,41 @@
 					</tbody>
 			  	</table>
 			  </div>
-			  <div class="tab-pane fade" id="friend" role="tabpanel" aria-labelledby="friend-tab">2345453</div>
+			  <div class="tab-pane fade" id="friend" role="tabpanel" aria-labelledby="friend-tab">
+			  	<br>
+			  	<h5>Waiting for Response</h5>
+			  	<div class="row">
+			  		<div class="col-md-12">
+				  		<% @friends_to_be_approved.each do |f| %>
+				  			<div class="card text-center user-card align-middle">
+					  			<%= render partial: "shared/user_icon", locals: {user: f} %>
+					  		</div>
+				  		<% end %>
+				  	</div>
+			  	</div>
+			  	<hr>
+			  	<h5>Friend Request</h5>
+			  	<div class="row">
+			  		<div class="col-md-12">
+				  		<% @friends_to_approve.each do |f| %>
+				  			<div class="card text-center user-card">
+				  				<%= render partial: "shared/user_icon", locals: {user: f} %>
+				  			</div>
+				  		<% end %>
+				  	</div>
+			  	</div>
+			  	<hr>
+			  	<h5>Friend List</h5>
+			  	<div class="row">
+			  		<div class="col-md-12">
+				  		<% @friends.each do |f| %>
+				  			<div class="card text-center user-card">
+				  				<%= render partial: "shared/user_icon", locals: {user: f} %>
+				  			</div>
+				  		<% end %>
+				  	</div>
+			  	</div>
+			  </div>
 			</div>
 		</div>
 	</div>
