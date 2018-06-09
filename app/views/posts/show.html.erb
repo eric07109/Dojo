@@ -1,11 +1,15 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
-			<h3 class="post_header_item"><%= @post.title %></h3>
+			<h3><%= @post.title %></h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
 			<% if not current_user.collected_posts.include?(@post)%>
-				<%= link_to "Collect", add_collection_post_path(post_id: @post), method: :post, class: "btn btn-primary post_header_item" %>
+				<%= link_to "Collect", add_collection_post_path(post_id: @post), method: :post, class: "btn btn-primary btn-sm" %>
 			<% else %>
-				<%= link_to "Uncollect", remove_collection_post_path(post_id: @post), method: :delete, class: "btn btn-danger post_header_item" %>
+				<%= link_to "Uncollect", remove_collection_post_path(post_id: @post), method: :delete, class: "btn btn-danger btn-sm" %>
 			<% end %>
 		</div>
 	</div>
