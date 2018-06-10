@@ -11,15 +11,6 @@ class FriendshipsController < ApplicationController
 		end
 	end
 
-	def update
-		@friendship = current_user.unapproved_friended.where({ sender_Id: params[:id]})
-		if @friendship.update(approved: true)
-			redirect_back fallback_location: posts_path
-		else
-			logger.debug "#{@friendship.errors.full_messages.to_sentence}"
-		end
-	end
-
 	def destroy
 	end
 

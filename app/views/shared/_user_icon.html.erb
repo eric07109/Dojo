@@ -4,7 +4,7 @@
 	<% if current_user.friends_to_be_approved.include?(user) %>
 		<%= button_to "Request Sent", {}, disabled: true, class: 'btn btn-light btn-sm' %>
 	<% elsif current_user.friends_to_approve.include?(user)%>
-		<%= button_to "Accept Invitation", friendship_path(user), method: :patch, class: 'btn btn-light btn-sm' %>
+		<%= link_to "Accept Invitation", {}, class: 'btn btn-light btn-sm accept-invitation' %>
 	<% else %>
 		<%= button_to "Add Friend", friendships_path(receiver_id: user), method: :post, class: 'btn btn-light btn-sm' %>
 	<% end %>

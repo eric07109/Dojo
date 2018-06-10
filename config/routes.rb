@@ -4,7 +4,11 @@ Rails.application.routes.draw do
   
   root to: "posts#index"
 
-  resources :users
+  resources :users, only: [:show] do 
+    member do 
+      patch :accept_friendship
+    end
+  end
 
   resources :posts do
   	resources :comments, shallow: true
@@ -14,6 +18,6 @@ Rails.application.routes.draw do
   	end
   end
 
-  resources :friendships, only: [:create, :destroy, :update]
+  resources :friendships, only: [:create, :destroy]
 
 end

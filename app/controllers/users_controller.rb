@@ -12,4 +12,10 @@ class UsersController < ApplicationController
 		@friends_to_approve = @user.friends_to_approve
 		@friends = @user.accepted_friends + @user.approved_friends
 	end
+
+	def accept_friendship
+		@friendship = current_user.unapproved_friended.where({ sender_Id: params[:id]})
+		@friendship.update(approved: true)
+		render :json => { :id => params[:id]}
+	end
 end
