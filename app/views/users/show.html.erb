@@ -146,18 +146,16 @@
 </div>
 <script type="text/javascript">
 	$(".accept-invitation").on("click", function(event) {
+		
 		var id = event.target.parentNode.id;
-		var friend = $("#" + id);
-		console.log(id);
-		console.log(friend);
 		$.ajax({
 			url: id +"/accept_friendship" ,
 			method: "PATCH",
 			dataType: "json",
-			success: function(data){
-				$("#" + data["id"]).remove();
-				console.log("AJAX SUCCESS");
-				
+			success: function(){
+				// $("#" +id).remove();
+				// console.log("Card removed");
+				$(".accept-invitation").addClass("disabled");
 			}
 		});
 	});
