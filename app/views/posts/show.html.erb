@@ -14,7 +14,7 @@
 		</div>
 	</div>
 	<div class="row post_show_entry">
-		<div class="col-md-2 post_show_user">
+		<div class="col-md-2 post_show_user" id="<%= @post.author.id %>">
 			<%= render partial: "shared/user_icon", locals: { user: @post.author} %>
 		</div>
 		<div class="col-md-10">
@@ -37,7 +37,7 @@
 	<!-- Comments if any -->
 	<% @comments.each do |c| %>
 	<div class="row post_show_comment">
-		<div class="col-md-2 post_show_user">
+		<div class="col-md-2 post_show_user " id="<%= c.user.id %>" >
 			<%= render partial: "shared/user_icon", locals: { user: c.user} %>
 		</div>
 		<div class="col-md-10">
@@ -69,3 +69,19 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+	$(".accept-invitation").on("click", function(event) {
+		
+		var id = event.target.parentNode.id;
+		$.ajax({
+			url: "/users/" + id +"/accept_friendship" ,
+			method: "PATCH",
+			dataType: "json",
+			success: function(){
+				// $("#" +id).remove();
+				// console.log("Card removed");
+				$(".button-"+id).addClass("disabled");
+			}
+		});
+	});
+</script>
