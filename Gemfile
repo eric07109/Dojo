@@ -5,6 +5,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'ffaker'
+
 gem 'impressionist'
 
 gem 'carrierwave', '~> 1.0'
