@@ -15,7 +15,7 @@
 	</div>
 	<div class="row post_show_entry">
 		<div class="col-md-2 post_show_user" id="<%= @post.author.id %>">
-			<%= render partial: "shared/user_icon", locals: { user: @post.author} %>
+			<%= render partial: "shared/user_icon", locals: { user: @post.author, related_user: current_user} %>
 		</div>
 		<div class="col-md-10">
 			<div class="row">
@@ -38,7 +38,7 @@
 	<% @comments.each do |c| %>
 	<div class="row post_show_comment">
 		<div class="col-md-2 post_show_user " id="<%= c.user.id %>" >
-			<%= render partial: "shared/user_icon", locals: { user: c.user} %>
+			<%= render partial: "shared/user_icon", locals: { user: c.user, related_user: current_user} %>
 		</div>
 		<div class="col-md-10">
 			<div class="row">

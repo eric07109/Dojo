@@ -60,18 +60,27 @@ namespace :test_data do
 				content: FFaker::Lorem.paragraph(rand(1..5))
 			)
 		end
-		puts "totall #{Comment.count} comments are created"
+		puts "totally #{Comment.count} comments are created"
 	end
 
 	task friendships: :environment do
 		Friendship.destroy_all
 		75.times do |i|
-			Friendship.create!(
-				sender_id: User.all.sample.id,
-				receiver_id: User.all.sample.id,
-				approved: [true, false].sample
-			)
+			sender = User.all.sample
+			receiver = User.all.sample
+			if sender.friends_to_be_approved.include?(receiver) or sender.friends_to_approve.include?(receiver) or sender.friend_with?(receiver)
+				puts "relationship between #{sender.lastname} and #{receiver.lastname} already exists"
+			else
+				Friendship.create!(
+					sender_id: sender.id,
+					receiver_id: receiver.id,
+					approved: [true, false].sample
+				)
+				puts "Create new relationship between #{sender.lastname} and #{receiver.lastname}"
+			end
+
 		end
+		puts "totally #{Friendship.count} friendships are created"
 	end
 
 	task collections: :environment do
@@ -83,5 +92,14 @@ namespace :test_data do
 			)
 		end
 	end
+
+	task :all do
+	    Rake::Task["test_data:users"].invoke
+	    Rake::Task["test_data:posts"].invoke
+	    Rake::Task["test_data:comments"].invoke
+	    Rake::Task["test_data:collections"].invoke
+	    Rake::Task["test_data:post_cat_mappings"].invoke
+	    Rake::Task["test_data:friendships"].invoke
+	  end
 
 end
