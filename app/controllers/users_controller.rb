@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+	before_action :authenticate_user!
 	def index
 	end
 
@@ -14,7 +15,7 @@ class UsersController < ApplicationController
 	end
 
 	def accept_friendship
-		@friendship = current_user.unapproved_friended.where({ sender_Id: params[:id][:avatar]})
+		@friendship = current_user.unapproved_friended.where({ sender_Id: params[:id]})
 		@friendship.update(approved: true)
 		respond_to :js, :html
 	end
@@ -29,6 +30,7 @@ class UsersController < ApplicationController
 	def update
 		@user = User.find(params[:id])
 		@user.update(user_params)
+		redirect_to user_path(@user)
 	end
 
 	private
