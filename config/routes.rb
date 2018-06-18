@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   
   root to: "posts#index"
 
-  resources :users, only: [:show] do 
+  resources :users, only: [:show, :edit, :update] do 
     member do 
       patch :accept_friendship
     end

@@ -14,9 +14,26 @@ class UsersController < ApplicationController
 	end
 
 	def accept_friendship
-		@friendship = current_user.unapproved_friended.where({ sender_Id: params[:id]})
+		@friendship = current_user.unapproved_friended.where({ sender_Id: params[:id][:avatar]})
 		@friendship.update(approved: true)
 		respond_to :js, :html
-		# render nothing: true
+	end
+
+	def ignore_friendship
+	end
+
+	def edit
+		@user = User.find(params[:id])
+	end 
+
+	def update
+		@user = User.find(params[:id])
+		@user.update(user_params)
+	end
+
+	private
+
+	def user_params
+		params.require(:user).permit(:description, :avatar)
 	end
 end

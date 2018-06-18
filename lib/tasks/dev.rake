@@ -70,6 +70,8 @@ namespace :test_data do
 			receiver = User.all.sample
 			if sender.friends_to_be_approved.include?(receiver) or sender.friends_to_approve.include?(receiver) or sender.friend_with?(receiver)
 				puts "relationship between #{sender.lastname} and #{receiver.lastname} already exists"
+			elsif sender == receiver
+				puts "friendships with oneself cannot be establisehd"
 			else
 				Friendship.create!(
 					sender_id: sender.id,
