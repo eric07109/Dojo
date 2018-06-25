@@ -5,11 +5,11 @@
 			<h5><%= @user.firstname%> <%= @user.lastname%></h5>
 		</div>
 		<div class="col-md-10">
-			<p><%= @user.description %></p>
+			<p><%= truncate(@user.description, length: 400) %></p>
 			<% if @user == current_user %>
 				<%= link_to "Edit Porfile", edit_user_path, class: 'btn btn-info btn-sm' %>
 			<% end %>
-		</div>
+		</div>`
 	</div>
 	<ul class="nav nav-tabs" id="myTab" role="tablist">
 	  <li class="nav-item">
