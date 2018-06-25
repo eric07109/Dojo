@@ -41,27 +41,19 @@ class PostsController < ApplicationController
 	end
 
 	def add_collection
-		@collection = current_user.collections.build(collection_params)
-		@collection.save
-		redirect_back fallback_location: posts_path(:post_id)
+		@collection = current_user.collections.build(post_id: params[:id])
+		@collection.save!
+		respond_to :js, :html
 	end
 
 	def remove_collection
-		@collection = current_user.collections.where({post_id: params[:post_id]}).first
-		@collection.destroy
-
-		if not params[:source] == "user-profile"
-			redirect_back fallback_location: posts_path(:post_id)
-		end
+		@collection = current_user.collections.where({post_id: params[:id]})
+		@collection.destroy_all
+		respond_to :js, :html
 	end
 
 	private
 	def post_params
 		params.require(:post).permit(:title, :content, :privacy, :attachment, categories_attributes: [:category_id])
 	end
-
-	def collection_params
-		params.permit(:post_id)
-	end
-
 end

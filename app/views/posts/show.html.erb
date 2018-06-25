@@ -5,11 +5,11 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-12">
+		<div class="col-md-12" id="<%= @post.id %>">
 			<% if not current_user.collected_posts.include?(@post)%>
-				<%= link_to "Collect", add_collection_post_path(post_id: @post), method: :post, class: "btn btn-primary btn-sm" %>
+				<span class="btn btn-primary btn-sm collect-post">Collect</span>
 			<% else %>
-				<%= link_to "Uncollect", remove_collection_post_path(post_id: @post), method: :delete, class: "btn btn-danger btn-sm" %>
+				<span class="btn btn-danger btn-sm uncollect-post">Uncollect</span>
 			<% end %>
 		</div>
 	</div>
@@ -71,7 +71,6 @@
 </div>
 <script type="text/javascript">
 	$(".accept-invitation").on("click", function(event) {
-		
 		var id = event.target.parentNode.id;
 		$.ajax({
 			url: "/users/" + id +"/accept_friendship" ,
@@ -81,6 +80,30 @@
 				// $("#" +id).remove();
 				// console.log("Card removed");
 				$(".button-"+id).addClass("disabled");
+			}
+		});
+	});
+
+	$(".collect-post").on("click", function(event) {
+		var id = event.target.parentNode.id;
+		$.ajax({
+			url: "/posts/" + id + "/add_collection",
+			method: "POST",
+			dataType: "json",
+			success: function(){
+				$(".collect-post").addClass("disabled");
+			}
+		});
+	});
+
+	$(".uncollect-post").on("click", function(event) {
+		var id = event.target.parentNode.id;
+		$.ajax({
+			url: "/posts/" + id + "/remove_collection",
+			method: "DELETE",
+			dataType: "json",
+			success: function(){
+				$(".uncollect-post").addClass("disabled");
 			}
 		});
 	});
