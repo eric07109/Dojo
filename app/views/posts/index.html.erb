@@ -1,30 +1,30 @@
+
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
 			<% @categories.each do |cat| %>
 				<button type="button" class="btn btn-primary"><%= cat.name %></button>
 			<% end %>
-			<table class="table">
+			<table data-pagination="true" data-page-size=20 data-page-list=[10,20,all] data-toggle="table">
 				<thead>
 					<tr>
-						<th scope="col">Replies Count</th>
+						<th data-sortable="true" scope="col">Replies Count</th>
 						<th scope="col">Title</th>
 						<th scope="col">Last replied at</th>
 						<th scope="col">View Count</th>
 					</tr>
-					<tbody>
-						<% @posts.each do |post|%>
-							<tr>
-								<td><%= post.comments.count%></td>
-								<td><%= link_to post.title, post_path(post) %></td>
-								<td><% if post.commented? %><%= post.comments.order(created_at: :desc).first.created_at %><% end %></td>
-								<td><%= post.impressionist_count(:filter=>:user_id)%></td>
-							</tr>
-						<%end%>
-					</tbody>
 				</thead>
+				<tbody>
+					<% @posts.each do |post|%>
+						<tr>
+							<td><%= post.comments.count%></td>
+							<td><%= link_to post.title, post_path(post) %></td>
+							<td><% if post.commented? %><%= post.comments.order(created_at: :desc).first.created_at %><% end %></td>
+							<td><%= post.impressionist_count(:filter=>:user_id)%></td>
+						</tr>
+					<%end%>
+				</tbody>
 			</table>
-			<%= paginate @posts%>
 		</div>
 	</div>
 </div>
