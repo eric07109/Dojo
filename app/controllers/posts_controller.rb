@@ -3,7 +3,7 @@ class PostsController < ApplicationController
 	impressionist :actions => [:show]
 
 	def index
-		@posts = Post.where("posts.published" => true)
+		@posts = Post.where("posts.published" => true).page(params[:page]).per(20)
 		@categories = Category.all
 	end
 
