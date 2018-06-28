@@ -83,9 +83,9 @@
 			  		</thead>
 			  		<tbody>
 			  			<% @user_collected_posts.each do |p| %>
-			  				<tr id="collection-<%= p.id %>">
+			  				<tr>
 				  				<td><%= link_to "#{p.title}", post_path(p) %></td>
-				  				<td><%= link_to "Uncollect", remove_collection_post_path(post_id: p.id, source: "user-profile"), method: :delete, remote: true, class: "btn btn-danger btn-sm" %></td>
+				  				<td><span class="btn btn-danger btn-sm uncollect-post" id="<%= p.id %>" >Uncollect</span></td>
 				  			</tr>
 			  			<% end %>
 			  		</tbody>
@@ -165,5 +165,17 @@
 				$(".button-"+id).addClass("disabled");
 			}
 		});
+	});
+	$(".uncollect-post").on("click", function(event) {
+		var post = event.target.parentNode.parentNode;
+		var id = event.target.id;
+		$.ajax({
+			url: '/posts/' + id + '/remove_collection',
+			method: 'DELETE',
+			dataType: 'json',
+			success: function(){
+				post.remove();
+			}
+		})
 	});
 </script>
