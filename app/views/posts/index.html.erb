@@ -2,9 +2,12 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
+		<span>Category Lists: </span>
 			<% @categories.each do |cat| %>
-				<%= link_to cat.name, posts_path(category_id: cat.id), class: "btn btn-primary "%>
+				<%= link_to cat.name, posts_path(category_id: cat.id), class: "btn btn-default"%>
 			<% end %>
+		</div>
+		<div class="col-md-12">
 			<table data-pagination="true" data-page-size=20 data-page-list=[10,20,all] data-toggle="table">
 				<thead>
 					<tr>
