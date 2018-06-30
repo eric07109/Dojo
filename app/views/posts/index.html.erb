@@ -3,7 +3,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<% @categories.each do |cat| %>
-				<button type="button" class="btn btn-primary"><%= cat.name %></button>
+				<%= link_to cat.name, posts_path(category_id: cat.id), class: "btn btn-primary "%>
 			<% end %>
 			<table data-pagination="true" data-page-size=20 data-page-list=[10,20,all] data-toggle="table">
 				<thead>
@@ -28,3 +28,8 @@
 		</div>
 	</div>
 </div>
+<script>
+	$(document).on('turbolinks:load', function() {
+        $('[data-toggle="table"]').bootstrapTable();
+    });
+</script>

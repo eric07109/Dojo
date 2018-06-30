@@ -3,7 +3,11 @@ class PostsController < ApplicationController
 	impressionist :actions => [:show]
 
 	def index
+		category_id = params[:category_id]
 		@posts = Post.where("posts.published" => true)
+		if params[:category_id]
+			@posts = Post.joins(:post_category_mappings).where("posts.published" => true, "post_category_mappings.category_id" => category_id)
+		end
 		@categories = Category.all
 	end
 
