@@ -56,6 +56,14 @@ class PostsController < ApplicationController
 		respond_to :js, :html
 	end
 
+	def feeds
+		@user_count = User.count
+		@post_count = Post.count
+		@comment_count = Comment.count
+		@top_users = User.joins(:comments).select('users.*, COUNT(comments.id) as count').group('users.id').order('count DESC').limit(10)
+		@top_posts = Post.joins(:comments).select('posts.*, COUNT(comments.id) as count').group('posts.id').order('count DESC').limit(10)
+	end
+
 	private
 	def post_params
 		params.require(:post).permit(:title, :content, :privacy, :attachment, categories_attributes: [:category_id])

@@ -15,7 +15,10 @@ Rails.application.routes.draw do
   	member do 
   		post :add_collection
   		delete :remove_collection
-  	end
+    end
+    collection do
+      get :feeds
+    end
   end
 
   resources :friendships, only: [:create, :destroy]

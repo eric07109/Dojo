@@ -1,0 +1,56 @@
+<div class="container">
+    <br>
+    <div class="row">
+        <div class="col-md-4">
+            <h4>User</h4>
+            <%= @user_count %>
+        </div>
+        <div class="col-md-4">
+            <h4>Post</h4>
+            <%= @post_count %>
+        </div>
+        <div class="col-md-4">
+            <h4>Comment</h4>
+            <%= @comment_count %>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-6">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>User Name</th>
+                        <th>Comment Count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <% @top_users.each do |tu| %>
+                    <tr>
+                        <td><%= tu.firstname%></td>
+                        <td><%= tu.count%></td>
+                    </tr>
+                <% end %>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>User Name</th>
+                        <th>Comment Count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <% @top_posts.each do |tp| %>
+                    <tr>
+                        <td><%= truncate(tp.title, length:20)%></td>
+                        <td><%= tp.count%></td>
+                    </tr>
+                <% end %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
