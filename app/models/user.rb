@@ -8,7 +8,7 @@ class User < ApplicationRecord
 	has_many :posts, foreign_key: "author_id", dependent: :destroy
 	has_many :published_posts, -> { where published: true }, :class_name => "Post", :foreign_key => "author_id"
 	has_many :unpublished_posts, -> { where published: false }, :class_name => "Post", :foreign_key => "author_id"
-
+	
 	has_many :comments, dependent: :destroy
 	has_many :commented_posts, through: :comments, source: :post
 
@@ -29,6 +29,10 @@ class User < ApplicationRecord
 	has_many :collections, dependent: :destroy
 	has_many :collected_posts, through: :collections, source: :post
 
+	def friends
+		self.accepted_friends + self.approved_friends
+	end
+	
 	def friend_with?(user)
 		self.accepted_friends.include?(user) or self.approved_friends.include?(user)
 	end

@@ -18,6 +18,13 @@ class Post < ApplicationRecord
 	has_many :collections
 	has_many :collected_user, through: :collections, source: :user
 
+	def self.readable_by(user)
+		Post.where(published: true, privacy: "all").or(
+			where(published: true, privacy: "myself", author_id: user.id)).or(
+			where(published: true, privacy: "friend", author_id: user.approved_friends)).or(
+			where(published: true, privacy: "friend", author_id: user.accepted_friends))
+	end
+
 	def commented?
 		return self.comments != []
 	end
