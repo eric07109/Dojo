@@ -59,7 +59,7 @@
 		<div class="col-md-10">
 			<div class="row">
 				<div class="col-md-10 post_show_comment">
-					<%= form_with url: post_comments_path(@post.id, action: 'create'), method: "post" do |form| %>
+					<%= form_with url: post_comments_path(@post, action: 'create'), method: "post" do |form| %>
 						<%= form.text_field :content, class: :comment_input%>
 						<%= form.submit "Comment" %>
 					<% end %>
