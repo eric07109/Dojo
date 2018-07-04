@@ -23,4 +23,9 @@ Rails.application.routes.draw do
 
   resources :friendships, only: [:create, :destroy]
 
+  namespace :admin do
+    resources :categories
+    resources :users, only: [:index, :update]
+  end
+
 end
