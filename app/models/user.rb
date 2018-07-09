@@ -36,4 +36,8 @@ class User < ApplicationRecord
 	def friend_with?(user)
 		self.accepted_friends.include?(user) or self.approved_friends.include?(user)
 	end
+
+	def admin?
+		self.admin
+	end
 end

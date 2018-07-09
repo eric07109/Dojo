@@ -23,8 +23,8 @@ Rails.application.routes.draw do
 
   resources :friendships, only: [:create, :destroy]
 
-  namespace :admin do
-    resources :categories
+  scope '/admin' do
+    resources :categories, only: [:index, :create, :update, :destroy]
     resources :users, only: [:index, :update]
   end
 

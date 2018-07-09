@@ -1,4 +1,15 @@
 namespace :test_data do
+	task admin: :environment do
+		puts 'start creating admin user'
+		User.create!(
+			lastname: "Admin",
+			firstname: "Admin",
+			email: "admin@example.com",
+			password: "12345678",
+			admin: true
+		)
+	end
+	
 	task users: :environment do
 		User.destroy_all
 		10.times do |u|
