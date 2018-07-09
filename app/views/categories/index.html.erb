@@ -1,23 +1,34 @@
 <div class="container">
-    <div class="col-md-12">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% @categories.each do |c|%>
-                <tr>
-                    <td><%= c.name %></td>
-                    <td>
-                        <%= link_to "Delete", category_path(c.id), method: :delete, class: "btn", 
-                        data: {confirm: "There are #{c.post_category_mappings.count} posts related to this category. Deleting this category will automatically remove this category for the above-mentioned posts. Are you sure to delete this category?"} %>
-                    </td>
-                </tr>
-                <% end %>
-            </tbody>
-        </table>
+    <div class="row">
+        <div class="col-md-12">
+            <%= form_with url: categories_path, method: :post do |form|%>
+                <%= form.label "Create a new category"%>
+                <%= form.text_field :name %>
+                <%= form.submit "Create", class: "btn btn-primary" %>
+            <% end %>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @categories.each do |c|%>
+                    <tr>
+                        <td><%= c.name %></td>
+                        <td>
+                            <%= link_to "Delete", category_path(c.id), method: :delete, class: "btn", 
+                            data: {confirm: "There are #{c.post_category_mappings.count} posts related to this category. Deleting this category will automatically remove this category for the above-mentioned posts. Are you sure to delete this category?"} %>
+                        </td>
+                    </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>

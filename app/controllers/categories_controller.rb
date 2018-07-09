@@ -9,4 +9,18 @@ class CategoriesController < ApplicationController
 		@category.destroy
 		redirect_back fallback_location: @root
 	end
+
+	def create
+		@category = Category.new(category_params)
+		# Todo: catcth unique constraint
+		if @category.save
+			redirect_back fallback_location: @root
+		end
+
+	end
+
+	private
+	def category_params
+		params.permit(:name)
+	end
 end
