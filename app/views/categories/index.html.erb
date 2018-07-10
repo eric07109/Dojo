@@ -21,8 +21,8 @@
                     <div class="col-md-6 category-name" id="<%=c.id%>"><%= c.name %></div>
                     <div class="col-md-6">
                         <button class="btn category-edit">Edit</button>
-                        <%= link_to "Delete", category_path(c.id), method: :delete, class: "btn", 
-                            data: {confirm: "There are #{c.post_category_mappings.count} posts related to this category. Deleting this category will automatically remove this category for the above-mentioned posts. Are you sure to delete this category?"} %>                    </div>
+                        <%= link_to "Delete", category_path(c.id), method: :delete, class: "btn" %>                    
+                    </div>
                 </div>
                 <%= form_with url: category_path(c.id), method: :patch do |f|%>
 
