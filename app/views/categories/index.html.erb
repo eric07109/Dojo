@@ -10,25 +10,66 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% @categories.each do |c|%>
-                    <tr>
-                        <td><%= c.name %></td>
-                        <td>
-                            <%= link_to "Delete", category_path(c.id), method: :delete, class: "btn", 
-                            data: {confirm: "There are #{c.post_category_mappings.count} posts related to this category. Deleting this category will automatically remove this category for the above-mentioned posts. Are you sure to delete this category?"} %>
-                        </td>
-                    </tr>
-                    <% end %>
-                </tbody>
-            </table>
+            <div class="table">
+                <div class="row">
+                    <div class="col-md-6"><b>Name</b></div>
+                    <div class="col-md-6"><b>Action</b></div>
+                </div>
+                <hr>
+                <% @categories.each do |c|%>
+                <div class="row">
+                    <div class="col-md-6 category-name" id="<%=c.id%>"><%= c.name %></div>
+                    <div class="col-md-6">
+                        <button class="btn category-edit">Edit</button>
+                        <%= link_to "Delete", category_path(c.id), method: :delete, class: "btn", 
+                            data: {confirm: "There are #{c.post_category_mappings.count} posts related to this category. Deleting this category will automatically remove this category for the above-mentioned posts. Are you sure to delete this category?"} %>                    </div>
+                </div>
+                <%= form_with url: category_path(c.id), method: :patch do |f|%>
+
+                <% end %>
+                <% end %>
+            </div>
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+$(".category-edit").on("click", function(event){
+    var $categoryNameField = $(event.target.parentNode.previousElementSibling);
+    var $form = $('<form>', {
+        'action': '/admin/categories/' + $categoryNameField[0].id,
+        'method': 'post',
+        'class': 'col-md-6'
+    });
+    var $hiddenMethod = $('<input>', {
+        'type': 'hidden',
+        'name': '_method',
+        'value': 'patch'
+    })
+    var $hiddentAuthentication = $('<input>', {
+        'type': 'hidden',
+        'name': 'authenticity_token',
+        'value': $('meta[name="csrf-token"]')[0].content
+    })
+    var $input = $('<input>', {
+        'type': 'text',
+        'value': $categoryNameField[0].textContent,
+        'name': 'name',
+        'id': $categoryNameField[0].id,
+        'class': 'col-md-10'
+    });
+    var $submit = $('<input>',{
+        'type': 'submit',
+        'value': 'V'
+    })
+    
+    $form.append($hiddenMethod);
+    $form.append($hiddentAuthentication);
+    $form.append($input);
+    $form.append($submit);
+    
+    $categoryNameField.replaceWith($form);
+})
+
+
+</script>

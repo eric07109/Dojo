@@ -19,6 +19,12 @@ class CategoriesController < ApplicationController
 
 	end
 
+	def update
+		@category = Category.find(params[:id])
+		@category.update(category_params)
+		redirect_back fallback_location: @root
+	end
+
 	private
 	def category_params
 		params.permit(:name)
