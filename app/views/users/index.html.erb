@@ -1,1 +1,26 @@
-<h1>HI</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table">
+                <div class="row">
+                    <div class="col-md-4"><b>Name</b></div>
+                    <div class="col-md-4"><b>Email</b></div>
+                    <div class="col-md-4"><b>Role</b></div>
+                </div>
+                <% @users.each do |u| %>
+                <div class="row user-admin-row">
+                    <div class="col-md-4"><%= u.firstname%> <%= u.lastname%></div>
+                    <div class="col-md-4"><%= u.email%></div>
+                    <div class="col-md-4">
+                        <%= form_tag update_admin_path(u), method: :patch do %>
+                            <% @admin = u.admin %>
+                            <%= select_tag :admin, options_for_select([['Admin user', true], ['Normal user', nil]], "#{@admin}") %>
+                            <%= submit_tag 'Update', class: "btn btn-sm btn-primary" %>
+                        <% end %>
+                    </div>
+                </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>

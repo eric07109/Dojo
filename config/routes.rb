@@ -25,7 +25,9 @@ Rails.application.routes.draw do
 
   scope '/admin' do
     resources :categories, only: [:index, :create, :update, :destroy]
-    resources :users, only: [:index, :update]
+    patch '/users/:id', to: 'users#update_admin', as: :update_admin
+    get '/users', to: 'users#index'
+    # resources :users, only: [:index, :update]
   end
 
 end
