@@ -13,8 +13,7 @@
                     <div class="col-md-4"><%= u.email%></div>
                     <div class="col-md-4">
                         <%= form_tag update_admin_path(u), method: :patch do %>
-                            <% @admin = u.admin %>
-                            <%= select_tag :admin, options_for_select([['Admin user', true], ['Normal user', nil]], "#{@admin}") %>
+                            <%= select_tag :admin, options_for_select([['Admin user', true], ['Normal user', false]], u.admin.to_s) %>
                             <%= submit_tag 'Update', class: "btn btn-sm btn-primary" %>
                         <% end %>
                     </div>

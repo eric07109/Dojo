@@ -107,7 +107,8 @@ namespace :test_data do
 	end
 
 	task :all do
-	    Rake::Task["test_data:users"].invoke
+		Rake::Task["test_data:users"].invoke
+		Rake::Task["test_data:admin"].invoke
 	    Rake::Task["test_data:posts"].invoke
 	    Rake::Task["test_data:comments"].invoke
 	    Rake::Task["test_data:collections"].invoke
