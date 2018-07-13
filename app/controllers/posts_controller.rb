@@ -4,8 +4,12 @@ class PostsController < ApplicationController
 
 	def index
 		if current_user == nil
+			# when user is visitor
 			params[:category_id] ? @posts = Post.readable_by_everyone().joins(:post_category_mappings).where("post_category_mappings.category_id" => params[:category_id] )
 			:  @posts = Post.readable_by_everyone()
+		elsif current_user.admin == true
+			# when user is admin
+			params[:category_id] ? @posts = Post.all.joins(:post_category_mappings).where("post_category_mappings.category_id" => params[:category_id] ) : @posts = Post.all 
 		else
 			params[:category_id] ? @posts = Post.readable_by(current_user).joins(:post_category_mappings).where("post_category_mappings.category_id" => params[:category_id] ) 
 			:  @posts = Post.readable_by(current_user)
