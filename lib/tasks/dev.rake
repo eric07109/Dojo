@@ -30,7 +30,7 @@ namespace :test_data do
 	task categories: :environment do
 		Category.destroy_all
 		5.times do |c|
-			category_name = FFaker::Lorem.word
+			category_name = FFaker::Lorem.unique.word
 			Category.create!(
 				name: category_name
 			)
@@ -111,7 +111,8 @@ namespace :test_data do
 		Rake::Task["test_data:admin"].invoke
 	    Rake::Task["test_data:posts"].invoke
 	    Rake::Task["test_data:comments"].invoke
-	    Rake::Task["test_data:collections"].invoke
+		Rake::Task["test_data:collections"].invoke
+		Rake::Task["test_data:categories"].invoke
 	    Rake::Task["test_data:post_cat_mappings"].invoke
 	    Rake::Task["test_data:friendships"].invoke
 	  end
