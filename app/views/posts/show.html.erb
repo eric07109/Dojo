@@ -25,7 +25,7 @@
 				</div>
 				<div class="col-md-2">
 					<% if @post.author == current_user%>
-						<%= button_tag "X", class: "btn btn-light btn-sm"%>
+						<%= link_to "X", post_path(@post), method: :delete, class: "btn btn-light btn-sm"%>
 						<%= button_tag "Edit", class: "btn btn-light btn-sm"%>
 					<% end %>
 				</div>

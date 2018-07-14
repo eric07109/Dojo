@@ -42,12 +42,18 @@ class PostsController < ApplicationController
 		end
 
 		#todo: if stash, redirect to user profile
-		redirect_back fallback_location: posts_path
+		redirect_to posts_path
 	end
 
 	def show
 		@post = Post.find(params[:id])
 		@comments = @post.comments.limit(20)
+	end
+
+	def destroy
+		@post = Post.find(params[:id])
+		@post.destroy
+		redirect_to posts_path
 	end
 
 	def add_collection
