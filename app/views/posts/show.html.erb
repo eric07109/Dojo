@@ -24,7 +24,7 @@
 					<% if @post.attachment.present? %><%= image_tag @post.attachment, class: "img_responsive" %><% end %>
 				</div>
 				<div class="col-md-2">
-					<% if @post.author == current_user%>
+					<% if @post.author == current_user or current_user.admin == true %>
 						<%= link_to "X", post_path(@post), method: :delete, class: "btn btn-light btn-sm"%>
 						<%= button_tag "Edit", class: "btn btn-light btn-sm"%>
 					<% end %>
@@ -44,8 +44,8 @@
 			<div class="row">
 				<div class="col-md-10"><%= c.content %></div>
 				<div class="col-md-2">
-				<% if c.user == current_user%>
-					<%= button_tag "X", class: "btn btn-light btn-sm"%>
+				<% if c.user == current_user or current_user.admin == true %>
+					<%= link_to "X", comment_path(c), method: :delete, class: "btn btn-light btn-sm"%>
 					<%= button_tag "Edit", class: "btn btn-light btn-sm"%>
 				<% end %>
 			</div>
