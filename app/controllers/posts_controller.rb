@@ -56,6 +56,23 @@ class PostsController < ApplicationController
 		redirect_to posts_path
 	end
 
+	def edit
+		@post = Post.find(params[:id])
+	end
+
+	def update
+		@post = Post.find(params[:id])
+		if params[:commit] == "Create Post" 
+			@post.published = true 
+			@post.update(post_params)
+			redirect_to post_path(@post)
+		elsif params[:commit] == "Save Draft" 
+			@post.published = false
+			@post.update(post_params)
+			redirect_back fallback_location: posts_path
+		end
+	end
+
 	def add_collection
 		@collection = current_user.collections.build(post_id: params[:id])
 		@collection.save!
