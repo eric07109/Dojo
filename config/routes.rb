@@ -30,4 +30,10 @@ Rails.application.routes.draw do
     # resources :users, only: [:index, :update]
   end
 
+  namespace :api, defaults: {format: :json} do
+    namespace :vi do
+      resources :posts, only: [:index, :show, :create, :update, :destroy]
+    end
+  end
+
 end
