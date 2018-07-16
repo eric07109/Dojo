@@ -64,6 +64,20 @@ class Api::V1::PostsController < ApiController
         end
     end
 
+    def destroy
+        @post = Post.find_by(id: params[:id])
+        if @post.destroy
+            render json: {
+                message: "Post #{@post.id} is deleted."
+            }
+        else
+            render json: {
+                errors: @post.errors
+            }
+        end
+
+    end
+
     private
     def post_params
         params.permit(:title, :content, :author_id, :published, :privacy, :attachment, categories: [:ids])
