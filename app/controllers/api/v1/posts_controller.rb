@@ -1,4 +1,4 @@
-class Api::V1::PostsController < ApiController
+class Api::V1::PostsController < ApiController    
     def index
         @posts = Post.all
         render json: {
@@ -18,5 +18,33 @@ class Api::V1::PostsController < ApiController
                 data: @post
             }
         end
+    end
+
+    def create
+        @post = Post.new(post_params)
+        @categories = params[:categories].split(",")
+        puts "Categories are #{@categories}"
+        if @post.save
+            @categories.each { |c|
+				c.to_i
+				@post.post_category_mappings.create([
+					{category_id: c}
+                ])
+			}
+            render json: {
+                message: "Post created successfully",
+                result: @post
+            }
+        else
+            render json: {
+                errors: @post.errors 
+            }
+        end
+    end
+
+
+    private
+    def post_params
+        params.permit(:title, :content, :author_id, :published, :privacy, :attachment, categories: [:ids])
     end
 end
