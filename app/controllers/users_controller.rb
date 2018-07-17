@@ -1,11 +1,11 @@
 class UsersController < ApplicationController
 	before_action :authenticate_user!
+	before_action :set_user, :only => [:show, :edit, :update, :update_admin]
 	def index
 		@users = User.all
 	end
 
 	def show
-		@user = User.find(params[:id])
 		@user_published_posts = @user.published_posts
 		@user_comments = @user.comments
 		@user_unpublished_posts = @user.unpublished_posts
@@ -25,17 +25,14 @@ class UsersController < ApplicationController
 	end
 
 	def edit
-		@user = User.find(params[:id])
 	end 
 
 	def update
-		@user = User.find(params[:id])
 		@user.update(user_params)
 		redirect_to user_path(@user)
 	end
 
 	def update_admin
-		@user = User.find(params[:id])
 		@user.update(admin_user_params)
 		redirect_to users_path
 	end
@@ -48,5 +45,9 @@ class UsersController < ApplicationController
 
 	def admin_user_params
 		params.permit(:admin)
+	end
+
+	def set_user
+		@user = User.find_by(id: params[:id])
 	end
 end

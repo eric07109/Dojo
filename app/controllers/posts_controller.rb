@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
 	before_action :authenticate_user!, :except => [:index]
+	before_action :set_post, :only => [:show, :destroy, :edit, :update]
 	impressionist :actions => [:show]
 
 	def index
@@ -46,22 +47,18 @@ class PostsController < ApplicationController
 	end
 
 	def show
-		@post = Post.find(params[:id])
 		@comments = @post.comments.limit(20)
 	end
 
 	def destroy
-		@post = Post.find(params[:id])
 		@post.destroy
 		redirect_to posts_path
 	end
 
 	def edit
-		@post = Post.find(params[:id])
 	end
 
 	def update
-		@post = Post.find(params[:id])
 		if params[:commit] == "Create Post" 
 			@post.published = true 
 			@post.update(post_params)
@@ -96,5 +93,9 @@ class PostsController < ApplicationController
 	private
 	def post_params
 		params.require(:post).permit(:title, :content, :privacy, :attachment, categories_attributes: [:category_id])
+	end
+
+	def set_post
+		@post = Post.find_by(id: params[:id])
 	end
 end

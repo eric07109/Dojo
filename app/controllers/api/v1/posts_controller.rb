@@ -1,5 +1,7 @@
 class Api::V1::PostsController < ApiController    
-	before_action :authenticate_user!, :except => [:index]
+    before_action :authenticate_user!, :except => [:index]
+    before_action :set_post, :only => [:show, :update, :destroy]
+
     def index
         @posts = Post.all
         render json: {
@@ -8,7 +10,6 @@ class Api::V1::PostsController < ApiController
     end
 
     def show
-        @post = Post.find_by(id: params[:id])
         if !@post
             render json: {
                 message: "Can't find the photo!",
@@ -44,7 +45,6 @@ class Api::V1::PostsController < ApiController
     end
 
     def update
-        @post = Post.find_by(id: params[:id])
         @categories = params[:categories].split(",")
         if @post.update(post_params)
             @post.post_category_mappings.destroy_all
@@ -66,7 +66,6 @@ class Api::V1::PostsController < ApiController
     end
 
     def destroy
-        @post = Post.find_by(id: params[:id])
         if @post.destroy
             render json: {
                 message: "Post #{@post.id} is deleted."
@@ -82,5 +81,9 @@ class Api::V1::PostsController < ApiController
     private
     def post_params
         params.permit(:title, :content, :author_id, :published, :privacy, :attachment, categories: [:ids])
+    end
+
+    def set_post
+        @post = Post.find_by(id: params[:id])
     end
 end
