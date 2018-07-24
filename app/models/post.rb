@@ -26,8 +26,7 @@ class Post < ApplicationRecord
 	def self.readable_by(user)
 		Post.where(published: true, privacy: "all").or(
 			where(published: true, privacy: "myself", author_id: user.id)).or(
-			where(published: true, privacy: "friend", author_id: user.approved_friends)).or(
-			where(published: true, privacy: "friend", author_id: user.accepted_friends))
+			where(published: true, privacy: "friend", author_id: user.friends))
 	end
 
 	def commented?
